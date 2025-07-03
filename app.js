@@ -10,16 +10,15 @@ const inputArea = document.getElementById('translate-box');
 console.dir(inputArea);
 let text = '';
 
-inputArea.addEventListener('keydown', (e) => {
+inputArea.addEventListener('input', (e) => {
     console.log(e);
-    console.log(inputArea.textContent);
+    console.log(e.target.value);
     let timer = setTimeout(() => {
-        console.log(inputArea.textContent);
+        console.log(e.target.value);
     }, 1000);
-    text = inputArea.textContent;
     clearTimeout(timer);
 });
-console.log(text);
+console.log(e.target.value);
 
 
 // const xhr = new XMLHttpRequest();
