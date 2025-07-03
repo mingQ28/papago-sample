@@ -1,34 +1,20 @@
 // 언어 감지 api
-// 사용자의 입력을 받고 2초 이상 입력을 하지 않는다면 언어감지 api 실행
-// 사용자 입력 -> 입력 값 읽기 -> api를 통해 반환값 확인 -> 반환값 출력
+// 사용자가 타자를 계속 입력하면 cleartimeout을 이용해 입력값을 삭제해버림
+// 입력이 멈추고 1초 후 마지막 입력값으로 api 실행
 
-// 사용자의 입력을 어떻게 읽어오지
-// keydown 리스너를 통해 디바운스 함수(clearTimeout)
-// 입력값을 api에 요청
+const inputArea = document.getElementById("translate-box");
+//console.dir(inputArea);
+let timer = null;
 
-const inputArea = document.getElementById('translate-box');
-console.dir(inputArea);
-let text = '';
-
-inputArea.addEventListener('input', (e) => {
-    console.log(e);
+// 먼저 스택에 clearTimeout 들어오고 web api에 전달된 timer를 즉시 취소
+// web api는 setTimeout 실행(등록)
+// 스택에 setTimeout 올라가고 콜백함수, 1000 web api로 전달
+// 1초 후에 콜백함수 큐에 저장
+// 스택이 비어있을 경우 함수실행
+inputArea.addEventListener("input", (e) => {
+  //console.dir(e.target);
+  clearTimeout(timer);
+  timer = setTimeout(() => {
     console.log(e.target.value);
-    let timer = setTimeout(() => {
-        console.log(e.target.value);
-    }, 1000);
-    clearTimeout(timer);
+  }, 1000);
 });
-console.log(e.target.value);
-
-
-// const xhr = new XMLHttpRequest();
-// xhr.onload = () => {
-//     if (xhr.readyState === xhr.DONE && xhr.status === 200) {
-//         const responseData = xhr.responseText; // responseText: 서버로부터 받은 응답 데이터
-//         const result = JSON.parse(responseData); // JSON 역직렬화
-//         console.log(result); 
-//     }
-
-// }
-
-// xhr.open('POST', '/dect');
