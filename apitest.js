@@ -9,12 +9,12 @@ const CLIENT_SECRET = 'yuMGLhvPatsfiY3vZ1MtHOAw3PGmQEjgFw5Vf87N'
 
 // 언어 감지
 export const detectLangs = (text) => {
-    // const payload = { // 요청 데이터
-    //     query: '안녕하세요?'
-    // };
+    const payload = { // 요청 데이터
+        query: text
+    };
 
     HTTP.post(DETECT_LANGUAGE_URL) // 보낼 엔드포인트(주소)
-        .send(text) // 보낼 데이터
+        .send(payload) // 보낼 데이터
         .set('X-NCP-APIGW-API-KEY-ID', CLIENT_ID)
         .set('X-NCP-APIGW-API-KEY', CLIENT_SECRET)
         // error가 발생했을 때는 콜백 함수의 인수 중 error에 넣어줌
