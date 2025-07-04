@@ -1,4 +1,5 @@
-const express = require('express') // node_modules/express/폴더 내 코드를 import
+import express from 'express' // node_modules/express/폴더 내 코드를 import
+import { detectLangs } from './apitest.js';
 // 여기서 express 관련 코드를 써야 하기 때문에
 
 const app = express() // app -> express를 통해 서버를 구성할 대 설정할 헬퍼 객체
@@ -21,7 +22,7 @@ app.get('/', rootHandler)
 app.post('/detect', (request, reponse) => {
     // 언어 감지 요청 처리 로직 구현
     console.log(request.body); 
-    
+    detectLangs(request.body);
 })
 
 // 언어 번역 요청 처리할 핸들러
