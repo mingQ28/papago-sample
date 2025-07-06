@@ -27,9 +27,7 @@ sourceTextArea.addEventListener("input", (event) => {
         sourceSelect.value = detectedLang;
 
         // 후속처리 : 언어감지 요청으로 응답받은 '감지된 언어 결과값(ex.ko)를 가지고 언어 번역 요청 수행
-        targetSelect.addEventListener("change", () => {
-          translateFromDetected(text);
-        });
+        translateFromDetected(text);
       }
     };
 
@@ -53,6 +51,11 @@ sourceTextArea.addEventListener("input", (event) => {
     // 4. 실제 요청 전송
     xhr.send(stringifiedData);
   }, 2000);
+});
+
+targetSelect.addEventListener("change", () => {
+  const text = sourceTextArea.value;
+  translateFromDetected(text);
 });
 
 const translateFromDetected = (text) => {
